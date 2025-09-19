@@ -2,13 +2,15 @@ from flask import Flask, send_from_directory, request, jsonify
 import os
 import mysql.connector
 from mysql.connector import Error
+from dotenv import load_dotenv
+load_dotenv()
 app = Flask(__name__)
 base_directory = os.path.dirname(os.path.abspath(__file__))
 db_config = {
-    'user': 'root', 
-    'password': 'idkthepassword', 
-    'host': 'localhost',   
-    'database': 'college'
+    'user': os.getenv("DATABASE_USER"), 
+    'password': os.getenv("DATABASE_PASSWORD"), 
+    'host': os.getenv("DATABASE_HOST"),   
+    'database': os.getenv("DATABASE_NAME")
 }
 def create_connection():
     """Create a database connection."""
